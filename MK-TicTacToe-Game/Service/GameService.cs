@@ -1,4 +1,5 @@
 ﻿using MK_TicTacToe_Game.Models;
+using MK_TicTacToe_Game.Adapters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,26 +7,23 @@ using System.Threading.Tasks;
 
 namespace MK_TicTacToe_Game.Service {
     public class GameService : IGameService {
-        ComputerPlayerLogic _computerPlayerLogic;
-        public GameService(ComputerPlayerLogic computerPlayerLogic){
+        IComputerPlayerLogic _computerPlayerLogic;
+        IBoardArrayAdapter _arrayAdapter;
+        public GameService(IComputerPlayerLogic computerPlayerLogic, IBoardArrayAdapter arrayAdapter){
             _computerPlayerLogic = computerPlayerLogic;
+            _arrayAdapter= arrayAdapter;
         }
 
         public async Task<GameState> GetComputerNextMove(string[][] board){
-            var result = new GameState(getCorrectBoard(board));
-            // var nextMovePoint = getCompMove(board);
-            // result.Board[nextMovePoint.X,nextMovePoint.Y] = "O";
-            // result.Status = GameStatus.Undefined;
+            var twoDArray = _arrayAdapter.GetBoardMatrix(board);
+           
+            var bestPoint = _computerPlayerLogic.GetBestPoint(twoDArray);
+            twoDArray[bestPoint.X, bestPoint.Y] = "O";
+
+            var result = GameState.GetGameState(twoDArray);
+
             return result;
         }
-
-        string[,] getCorrectBoard(string[][] board){
-            var result = new string[board.Length, board.Length];
-            return result;
-        }
-
-
-
 
     }
 }

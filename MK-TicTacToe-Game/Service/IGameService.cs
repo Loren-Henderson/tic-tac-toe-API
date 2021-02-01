@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace MK_TicTacToe_Game.Service {
     public interface IGameService {
-
         Task<GameState> GetComputerNextMove(string[][] board);
     }
 }

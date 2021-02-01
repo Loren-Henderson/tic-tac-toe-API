@@ -2,7 +2,7 @@ using System;
 using MK_TicTacToe_Game.Models;
 
 namespace MK_TicTacToe_Game.Service {
-    public class ComputerPlayerLogic{
+    public class ComputerPlayerLogic: IComputerPlayerLogic{
         private double[,] _boardPoints;
 
         public Point GetBestPoint(string[,] boardMatrix) {

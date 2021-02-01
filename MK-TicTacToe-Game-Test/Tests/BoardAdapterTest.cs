@@ -11,10 +11,11 @@ namespace MK_TicTacToe_Game_Test.Tests {
         }
         [Fact]
         public void GetBoardMatrix_returnsTwoDArray(){
-            var arrayOfArray = new string[3][];
-            for(int i = 0; i<3; i++){
-                arrayOfArray[i] = new string[3];
-                for(int j = 0; j<3; j++){
+            var boardSize = 3;
+            var arrayOfArray = new string[boardSize][];
+            for(int i = 0; i<boardSize; i++){
+                arrayOfArray[i] = new string[boardSize];
+                for(int j = 0; j<boardSize; j++){
                     arrayOfArray[i][j] = $"({i}, {j})";
                 }
             }
@@ -22,8 +23,8 @@ namespace MK_TicTacToe_Game_Test.Tests {
             
             Assert.NotNull(twoDArray);
 
-            for(int i = 0; i<3; i++){
-                for(int j = 0; j<3; j++){
+            for(int i = 0; i<boardSize; i++){
+                for(int j = 0; j<boardSize; j++){
                     Assert.Equal(arrayOfArray[i][j], twoDArray[i,j]);
                 }
             }

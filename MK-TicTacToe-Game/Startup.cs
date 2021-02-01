@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MK_TicTacToe_Game.Adapters;
 using MK_TicTacToe_Game.Service;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,8 @@ namespace MK_TicTacToe_Game {
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MK_TicTacToe_Game", Version = "v1" });
             });
+            services.AddScoped<IBoardArrayAdapter, BoardArrayAdapter>();
+            services.AddScoped<IComputerPlayerLogic, ComputerPlayerLogic>();
             services.AddScoped<IGameService, GameService>();
         }
 
