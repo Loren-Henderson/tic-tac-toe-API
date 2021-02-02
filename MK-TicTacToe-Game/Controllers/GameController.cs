@@ -16,8 +16,8 @@ namespace MK_TicTacToe_Game.Controllers {
         }
 
         [HttpPost]
-        public async Task<GameState> GetNextState(string[][] board){
-            return await _gameService.GetComputerNextMove(board);
+        public async Task<IActionResult> GetNextState(string[][] board){
+            return Ok(await _gameService.GetComputerNextMove(board));
         }
         
     }
