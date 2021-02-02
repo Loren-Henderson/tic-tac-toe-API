@@ -17,10 +17,13 @@ namespace MK_TicTacToe_Game.Service {
         public async Task<GameState> GetComputerNextMove(string[][] board){
             var twoDArray = _arrayAdapter.GetBoardMatrix(board);
            
-            var bestPoint = _computerPlayerLogic.GetBestPoint(twoDArray);
-            twoDArray[bestPoint.X, bestPoint.Y] = "O";
-
             var result = GameState.GetGameState(twoDArray);
+
+            if (result.Status == GameStatus.Undefined) {
+                var bestPoint = _computerPlayerLogic.GetBestPoint(twoDArray);
+                twoDArray[bestPoint.X, bestPoint.Y] = "O";
+                result = GameState.GetGameState(twoDArray);
+            }
 
             return result;
         }
