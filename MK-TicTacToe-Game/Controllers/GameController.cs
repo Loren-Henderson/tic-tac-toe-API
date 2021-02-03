@@ -5,9 +5,11 @@ using MK_TicTacToe_Game.Service;
 using MK_TicTacToe_Game.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 
 namespace MK_TicTacToe_Game.Controllers {
     [Route("api/[controller]")]
+    [EnableCors("AllowOrigin")]
     [ApiController]
     public class GameController : ControllerBase {
         private IGameService _gameService;

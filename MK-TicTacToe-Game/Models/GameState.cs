@@ -4,12 +4,12 @@ namespace MK_TicTacToe_Game.Models {
 
         private GameState(){}
         
-        public string[,] Board { get; private set; } = new string[3, 3];
+        public string[][] Board { get; private set; } = new string[3][];
         public int WinLine_StartBox { get; set; }
         public int WinLine_EndBox { get; set; }
         public GameStatus Status { get; private set; }
 
-        public static GameState GetGameState(string[,] board){
+        public static GameState GetGameState(string[][] board){
             var result = new GameState();
             result.Board = board;
             result.UpdateStatus();
@@ -21,12 +21,12 @@ namespace MK_TicTacToe_Game.Models {
 
             for (int i = 0; i < 3; i++) {
                 // Detecting Horizontal Wins
-                if (!string.IsNullOrEmpty(Board[i, 0])) {
-                    if (Board[i, 1] == Board[i, 2] && Board[i, 0] == Board[i, 2])
+                if (!string.IsNullOrEmpty(Board[i][0])) {
+                    if (Board[i][1] == Board[i][2] && Board[i][0] == Board[i][2])
                     {
                         WinLine_StartBox = ConvertArrayToBoxValue(i, 0);
                         WinLine_EndBox = ConvertArrayToBoxValue(i, 2);
-                        Status = Board[i, 0] == "X" ? GameStatus.X : GameStatus.O;
+                        Status = Board[i][0] == "X" ? GameStatus.X : GameStatus.O;
                         return;
                     }
                 }
