@@ -1,5 +1,4 @@
-﻿
-namespace MK_TicTacToe_Game.Models {
+﻿namespace MK_TicTacToe_Game.Models {
     public class GameState {
 
         private GameState(){}
@@ -32,21 +31,21 @@ namespace MK_TicTacToe_Game.Models {
                 }
 
                 // Detecting Verticle Wins
-                if (!string.IsNullOrEmpty(Board[0, i]))
+                if (!string.IsNullOrEmpty(Board[0][i]))
                 {
-                    if (Board[1, i] == Board[2, i] && Board[0, i] == Board[2, i])
+                    if (Board[1][i] == Board[2][i] && Board[0][i] == Board[2][i])
                     {
                         WinLine_StartBox = ConvertArrayToBoxValue(0, i);
                         WinLine_EndBox = ConvertArrayToBoxValue(2, i);
-                        Status = Board[0, i] == "X" ? GameStatus.X : GameStatus.O;
+                        Status = Board[0][i] == "X" ? GameStatus.X : GameStatus.O;
                         return;
                     }
                 }
 
                 if (
-                    string.IsNullOrEmpty(Board[i, 0]) ||
-                    string.IsNullOrEmpty(Board[i, 1]) ||
-                    string.IsNullOrEmpty(Board[i, 2])
+                    string.IsNullOrEmpty(Board[i][0]) ||
+                    string.IsNullOrEmpty(Board[i][1]) ||
+                    string.IsNullOrEmpty(Board[i][2])
                     ) {
                     IsCat = false;
                 }
@@ -54,22 +53,22 @@ namespace MK_TicTacToe_Game.Models {
             }
 
             // Detecting Diagonal Wins
-            if (!string.IsNullOrEmpty(Board[1, 1]))
+            if (!string.IsNullOrEmpty(Board[1][1]))
             {
                 // Top Left to Bottom Right
-                if (Board[0, 0] == Board[1, 1] && Board[1, 1] == Board[2, 2]) {
+                if (Board[0][0] == Board[1][1] && Board[1][1] == Board[2][2]) {
                     WinLine_StartBox = ConvertArrayToBoxValue(0, 0);
                     WinLine_EndBox = ConvertArrayToBoxValue(2, 2);
-                    Status = Board[1, 1] == "X" ? GameStatus.X : GameStatus.O;
+                    Status = Board[1][1] == "X" ? GameStatus.X : GameStatus.O;
                     return;
                 }
 
                 // Top Right to Bottom Left
-                if (Board[0, 2] == Board[1, 1] && Board[1, 1] == Board[2, 0])
+                if (Board[0][2] == Board[1][1] && Board[1][1] == Board[2][0])
                 {
                     WinLine_StartBox = ConvertArrayToBoxValue(0, 2);
                     WinLine_EndBox = ConvertArrayToBoxValue(2, 0);
-                    Status = Board[1, 1] == "X" ? GameStatus.X : GameStatus.O;
+                    Status = Board[1][1] == "X" ? GameStatus.X : GameStatus.O;
                     return;
                 }
             }

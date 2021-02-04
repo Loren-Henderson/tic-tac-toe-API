@@ -8,15 +8,11 @@ using System.Threading.Tasks;
 namespace MK_TicTacToe_Game.Service {
     public class GameService : IGameService {
         IComputerPlayerLogic _computerPlayerLogic;
-        IBoardArrayAdapter _arrayAdapter;
-        public GameService(IComputerPlayerLogic computerPlayerLogic, IBoardArrayAdapter arrayAdapter){
+        public GameService(IComputerPlayerLogic computerPlayerLogic){
             _computerPlayerLogic = computerPlayerLogic;
-            _arrayAdapter= arrayAdapter;
         }
 
         public async Task<GameState> GetComputerNextMove(string[][] board){
-            //var twoDArray = _arrayAdapter.GetBoardMatrix(board);
-           
             var result = GameState.GetGameState(board);
 
             if (result.Status == GameStatus.Undefined) {

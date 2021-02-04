@@ -3,14 +3,13 @@ using MK_TicTacToe_Game.Models;
 
 namespace MK_TicTacToe_Game.Service {
     public class ComputerPlayerLogic: IComputerPlayerLogic{
-        private double[,] _boardPoints;
 
         public Point GetBestPoint(string[][] boardMatrix) {
             if(string.IsNullOrEmpty(boardMatrix[1][1])){
                 return new Point(1, 1);
             }
-            for(var i = 0; i < boardMatrix.GetLength(0); i++){
-                for(var j = 0; j < boardMatrix.GetLength(1); j++){
+            for(var i = 0; i < boardMatrix.Length; i++){
+                for(var j = 0; j < boardMatrix[i].Length; j++){
                    if(string.IsNullOrEmpty(boardMatrix[i][j])){
                         return new Point(i, j);
                     }
@@ -21,7 +20,7 @@ namespace MK_TicTacToe_Game.Service {
 
 
 
-
+        // private double[,] _boardPoints;
         // public Point GetBestPoint(string[,] boardMatrix) {
         //     var result = new List<Point>();
         //     rebuildBoardPoints(boardMatrix);
