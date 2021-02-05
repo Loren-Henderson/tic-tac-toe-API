@@ -43,7 +43,8 @@ namespace MK_TicTacToe_Game
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MK_TicTacToe_Game", Version = "v1" });
             });
-            services.AddScoped<IComputerPlayerLogic, ComputerPlayerLogic>();
+            //services.AddScoped<IComputerPlayerLogic, ComputerPlayerLogic>();
+            services.AddScoped<IComputerPlayerLogic, SmartComputerLogic>();
             services.AddScoped<IGameService, GameService>();
         }
 

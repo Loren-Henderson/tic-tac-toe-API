@@ -11,7 +11,7 @@ namespace MK_TicTacToe_Game.Service {
         public GameService(IComputerPlayerLogic computerPlayerLogic){
             _computerPlayerLogic = computerPlayerLogic;
         }
-
+        
         public async Task<GameState> GetComputerNextMove(string[][] board){
             var result = GameState.GetGameState(board);
 

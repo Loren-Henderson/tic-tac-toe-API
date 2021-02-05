@@ -5,10 +5,10 @@ using MK_TicTacToe_Game.Service;
 namespace MK_TicTacToe_Game_Test.Tests {
     public class ComputerPlayerLogicTest {
         ComputerPlayerLogic computerPlayerLogic;
-        string[,] board;
+        string[][] board;
         public ComputerPlayerLogicTest(){
             computerPlayerLogic = new ComputerPlayerLogic();
-            board = new string[3,3]{{"","",""},{"","",""},{"","",""}};
+            board = new []{new []{"","",""},new []{"","",""},new []{"","",""}};
         }
         
         // _ _ _
@@ -16,7 +16,7 @@ namespace MK_TicTacToe_Game_Test.Tests {
         // _ _ _
         [Fact]
         public void GetBestPoint_returnsBestPoint_whenBoardEmpty() {
-            var board = new string[3,3];
+            var board = new []{new []{"","",""},new []{"","",""},new []{"","",""}};
             var bestPoint = computerPlayerLogic.GetBestPoint(board);
 
             Assert.Equal(1, bestPoint.X);
@@ -27,7 +27,7 @@ namespace MK_TicTacToe_Game_Test.Tests {
         // _ _ _
         [Fact]
         public void GetBestPoint_returnsBestPoint_whenBoardHasPoints(){
-            board[1, 1] = "X";
+            board[1][1] = "X";
             var bestPoint = computerPlayerLogic.GetBestPoint(board);
 
             Assert.Equal(0, bestPoint.X);
@@ -39,9 +39,9 @@ namespace MK_TicTacToe_Game_Test.Tests {
         // X O O
         [Fact]
         public void GetBestPoint_returnsBestPoint_whenBoardIsFull(){
-            for(var i = 0; i < board.GetLength(0); i++){
-                for(var j = 0; j < board.GetLength(1); j++){
-                    board[i,j] = "X";
+            for(var i = 0; i < board.Length; i++){
+                for(var j = 0; j < board[i].Length; j++){
+                    board[i][j] = "X";
                 }
             }
             var bestPoint = computerPlayerLogic.GetBestPoint(board);

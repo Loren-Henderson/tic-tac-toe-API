@@ -22,7 +22,7 @@ namespace MK_TicTacToe_Game_Test.Tests
         {
             var arrayOfArray = new string[3][];
 
-            mockGameService.Setup(aa => aa.GetComputerNextMove(arrayOfArray)).ReturnsAsync(GameState.GetGameState(new string[3,3]));
+            mockGameService.Setup(aa => aa.GetComputerNextMove(arrayOfArray)).ReturnsAsync(GameState.GetGameState(new []{new []{"","",""},new []{"","",""},new []{"","",""}}));
             var controller = new GameController(mockGameService.Object);
 
             var result = await controller.GetNextState(arrayOfArray);
