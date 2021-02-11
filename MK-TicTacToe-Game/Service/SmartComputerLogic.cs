@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 namespace MK_TicTacToe_Game.Service {
     public class SmartComputerLogic : IComputerPlayerLogic {
 
-        private double[,] _boardPoints;
+        private decimal[,] _boardPoints;
         private string opoPlayerSign = "X";
         private string _playerSign = "O";
         public Point GetBestPoint(string[][] boardMatrix) {
             var result = new List<Point>();
             rebuildBoardPoints(boardMatrix);
-            double maxPoints = 0;
+            decimal maxPoints = int.MinValue;
             for (int x = 0; x < boardMatrix.Length; x++) {
                 for (int y = 0; y < boardMatrix[x].Length; y++) {
-                    if (_boardPoints[x, y] > maxPoints) {
+                    if (_boardPoints[x, y] > maxPoints && string.IsNullOrEmpty(boardMatrix[x][y])) {
                         maxPoints = _boardPoints[x, y];
                         var point = new Point(x, y);
                         if (maxPoints > 10) {
@@ -32,7 +32,7 @@ namespace MK_TicTacToe_Game.Service {
             return result[new Random().Next(result.Count - 1)];
         }
         private void rebuildBoardPoints(string[][] boardMatrix) {
-            _boardPoints = new double[boardMatrix.Length, boardMatrix.Length];
+            _boardPoints = new decimal[boardMatrix.Length, boardMatrix.Length];
             var winPoints = new Dictionary<string, List<(int x, int y, bool isFreePoint)>>();
 
             var checkAndAdd = new Action<string, int, int, string>((key, x, y, sign) => {
@@ -67,11 +67,11 @@ namespace MK_TicTacToe_Game.Service {
                     if (winPoint.Value[i].isFreePoint) {
                         pointsToWin++;
                         lastPoint = i;
-                        _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y]++;
+                        _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y] += 1m;
                     }
                 }
                 if (pointsToWin == 1) {
-                    _boardPoints[winPoint.Value[lastPoint].x, winPoint.Value[lastPoint].y] += 11;
+                    _boardPoints[winPoint.Value[lastPoint].x, winPoint.Value[lastPoint].y] += 11m;
                 }
             }
             #endregion
@@ -92,18 +92,38 @@ namespace MK_TicTacToe_Game.Service {
                     checkAndAdd("J" + i, j, i, opoPlayerSign);
                 }
             }
+            var nextStepWillHaveTwoWinPoints = 0;
+            var twoWinPointsX = -1;
+            var twoWinPointsY = -1;
             foreach (var winPoint in winPoints) {
                 var lastPoint = -1;
                 var pointsToWin = 0;
+                var addingPoints = 0.3m;
+                winPoint.Value.FindAll(v=>!v.isFreePoint).ForEach(v => { addingPoints += 0.1m; });
                 for (var i = 0; i < winPoint.Value.Count; i++) {
                     if (winPoint.Value[i].isFreePoint) {
                         pointsToWin++;
                         lastPoint = i;
-                        _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y] += 0.1;
+                        var e = _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y] % 1.0m;
+                        if ((e == 0.4m || e == 0.8m) && addingPoints == 0.4m 
+                            //&& false
+                            ) {
+                            if (nextStepWillHaveTwoWinPoints==1) {
+                                _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y] -= 2.5m;
+                                _boardPoints[twoWinPointsX, twoWinPointsY] -= 5m;
+                            } else {
+                                _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y] += 2.5m;
+                            }
+                            nextStepWillHaveTwoWinPoints++;
+                            twoWinPointsX = winPoint.Value[i].x;
+                            twoWinPointsY = winPoint.Value[i].y;
+                        } else {
+                            _boardPoints[winPoint.Value[i].x, winPoint.Value[i].y] += addingPoints;
+                        }
                     }
                 }
                 if (pointsToWin == 1) {
-                    _boardPoints[winPoint.Value[lastPoint].x, winPoint.Value[lastPoint].y] += 5;
+                    _boardPoints[winPoint.Value[lastPoint].x, winPoint.Value[lastPoint].y] += 6m;
                 }
             }
             #endregion
@@ -112,11 +132,22 @@ namespace MK_TicTacToe_Game.Service {
                 for (int i = 0; i < boardMatrix.Length; i++) {
                     for (int j = 0; j < boardMatrix[i].Length; j++) {
                         if (string.IsNullOrEmpty(boardMatrix[i][j])) {
-                            _boardPoints[i, j]++;
+                            _boardPoints[i, j] += 1m;
                         }
                     }
                 }
             }
+            printMatrix(_boardPoints);
+        }
+        private void printMatrix(decimal[,] matrix){
+            Console.WriteLine("-------------------");
+            for(var i = 0; i < matrix.GetLength(0); i++){
+                for(var j = 0; j < matrix.GetLength(1); j++){
+                    Console.Write("{0}; ", matrix[i, j].ToString("N"));
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine("-------------------");
         }
     }
 }
