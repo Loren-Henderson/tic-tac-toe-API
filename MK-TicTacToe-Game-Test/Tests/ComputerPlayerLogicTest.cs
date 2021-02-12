@@ -38,7 +38,7 @@ namespace MK_TicTacToe_Game_Test.Tests {
         // O X X
         // X O O
         [Fact]
-        public void GetBestPoint_returnsBestPoint_whenBoardIsFull(){
+        public void GetBestPoint_returnsNull_WhenBoardIsFull(){
             for(var i = 0; i < board.Length; i++){
                 for(var j = 0; j < board[i].Length; j++){
                     board[i][j] = "X";
@@ -46,6 +46,20 @@ namespace MK_TicTacToe_Game_Test.Tests {
             }
             var bestPoint = computerPlayerLogic.GetBestPoint(board);
             Assert.Null(bestPoint);
+        }
+
+        [Fact]
+        public void GetBestPoint_BlocksPlayer_ifPlayerHasTwoInARow()
+        {
+            board[0][0] = "X";
+            board[0][1] = "X";
+            board[1][1] = "O";
+          
+
+            var bestPoint = computerPlayerLogic.GetBestPoint(board);
+
+            Assert.AreEqual(0, bestPoint.X);
+            Assert.AreEqual(2, bestPoint.Y);
         }
         
     }
