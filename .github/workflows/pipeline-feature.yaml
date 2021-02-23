@@ -21,18 +21,18 @@ jobs:
 
   # analyze 
 
-  package_and_deploy:
-    name: Publish Docker Img to Docker Hub
-    runs-on: ubuntu-20.04
-    needs: [build_dotnet, test_dotnet]
-    env:
-      DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    steps:
-      - uses: actions/checkout@v2
-      - run: docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
-      - run: docker image build -t ${DOCKER_REPO} .
-      - run: docker image tag ${DOCKER_REPO} cvchavez2/mk-tictactoe-game
-      - run: docker image push cvchavez2/mk-tictactoe-game
-      - run: docker logout
+  # package_and_deploy:
+  #   name: Publish Docker Img to Docker Hub
+  #   runs-on: ubuntu-20.04
+  #   needs: [build_dotnet, test_dotnet]
+  #   env:
+  #     DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
+  #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - run: docker login --username ${DOCKER_USERNAME} --password ${DOCKER_PASSWORD}
+  #     - run: docker image build -t ${DOCKER_REPO} .
+  #     - run: docker image tag ${DOCKER_REPO} cvchavez2/mk-tictactoe-game
+  #     - run: docker image push cvchavez2/mk-tictactoe-game
+  #     - run: docker logout
