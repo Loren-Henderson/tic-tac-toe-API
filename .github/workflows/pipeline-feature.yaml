@@ -1,0 +1,20 @@
+name: Future Branch
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+      - 'develop'
+
+jobs:
+  build_dotnet:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: dotnet build
+
+  test_dotnet:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: dotnet test
