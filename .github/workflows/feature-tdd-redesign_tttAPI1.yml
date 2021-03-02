@@ -32,5 +32,5 @@ jobs:
       with:
         app-name: 'tttAPI1'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_44bd7c82cb46429cb475dc552438f90e }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_21a61645f5ba4703ba65a6104754a7de }}
         package: ${{env.DOTNET_ROOT}}/myapp 
