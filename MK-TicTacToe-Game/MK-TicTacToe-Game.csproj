@@ -5,6 +5,7 @@
     <RootNamespace>MK_TicTacToe_Game</RootNamespace>
     <UserSecretsId>bbebc5c5-43e5-4414-87c5-a765e8511316</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

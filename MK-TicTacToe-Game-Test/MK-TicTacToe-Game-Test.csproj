@@ -5,6 +5,8 @@
     <RootNamespace>MK_TicTacToe_Game_Test</RootNamespace>
 
     <IsPackable>false</IsPackable>
+
+    <OutputType>WinExe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MK-TicTacToe-Game\MK-TicTacToe-Game.csproj"/>
+    <ProjectReference Include="..\MK-TicTacToe-Game\MK-TicTacToe-Game.csproj" />
   </ItemGroup>
 </Project>

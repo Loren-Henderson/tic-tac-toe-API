@@ -58,8 +58,8 @@ namespace MK_TicTacToe_Game_Test.Tests {
 
             var bestPoint = computerPlayerLogic.GetBestPoint(board);
 
-            Assert.AreEqual(0, bestPoint.X);
-            Assert.AreEqual(2, bestPoint.Y);
+            Assert.Equal(0, bestPoint.X);
+            Assert.Equal(2, bestPoint.Y);
         }
         
     }

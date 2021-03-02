@@ -6,11 +6,11 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
-WORKDIR /src
+WORKDIR /MK-TicTacToe-Game
 COPY ["MK-TicTacToe-Game/MK-TicTacToe-Game.csproj", "MK-TicTacToe-Game/"]
 RUN dotnet restore "MK-TicTacToe-Game/MK-TicTacToe-Game.csproj"
 COPY . .
-WORKDIR "/src/MK-TicTacToe-Game"
+WORKDIR "/MK-TicTacToe-Game"
 RUN dotnet build "MK-TicTacToe-Game.csproj" -c Release -o /app/build
 
 FROM build AS publish
